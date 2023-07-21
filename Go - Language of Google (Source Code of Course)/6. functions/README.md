@@ -8,8 +8,7 @@ What I've learned in this lesson:
 * Import can be "merged" with (). Example `import ("fmt" "os")`
 * `os.Exit(0)` Quits the program with success.
 * `os.Exit(-1)` Quits the program with exit status, good for error handling.
-
-
+* I've learned that it's possible to have a multi "return" function.
 
 ```
 func introduction() int
