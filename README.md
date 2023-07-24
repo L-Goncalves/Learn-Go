@@ -12,5 +12,7 @@ This is mainly my journey on Learning it and I hope I can improve all of this ov
 <br/>
 <br/>
 <a href="https://www.youtube.com/@GolangDojo/videos">GolangDojo Youtube Channel </a>
-
+<br>
+<br>
+<a href="https://www.youtube.com/watch?v=e-oBn806Pzc">Golang Tutorial #12 - Arrays</a>
 
