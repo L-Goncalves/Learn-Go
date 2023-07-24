@@ -4,11 +4,15 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
+
+const delay = 5 // In Minutes
 
 func main() {
 	readWebsitesFromFile()
@@ -22,7 +26,7 @@ func main() {
 		case 1:
 			startMonitoring()
 		case 2:
-			fmt.Println("Showing Logs...")
+			showLogs()
 		case 0:
 			fmt.Println("Exiting...")
 			os.Exit(0)
@@ -58,7 +62,7 @@ func startMonitoring() {
 	}
 
 	fmt.Println("")
-	fmt.Println("Waiting for 5 Minutes to verify again..")
+	fmt.Println("Waiting for " + strconv.Itoa(delay) + " Minutes to verify again..")
 	fmt.Println("")
 	wait()
 
@@ -66,6 +70,7 @@ func startMonitoring() {
 
 func wait() {
 	time.Sleep(5 * time.Minute)
+
 	startMonitoring()
 }
 
@@ -85,8 +90,10 @@ func testWebsite(website string) {
 
 	if resp.StatusCode == 200 {
 		fmt.Println("Website:", website, "has been successfully loaded")
+		registerLog(website, true)
 	} else {
 		fmt.Println("Website", website, "has problems. Status Code", resp.StatusCode)
+		registerLog(website, false)
 	}
 }
 
@@ -116,4 +123,26 @@ func readWebsitesFromFile() []string {
 
 	return websites
 
+}
+
+func registerLog(website string, status bool) {
+	archive, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	archive.WriteString(time.Now().Format("02/01/2006 15:04:05") + " - " + website + " - ONLINE: " + strconv.FormatBool(status) + "\n")
+
+	archive.Close()
+}
+
+func showLogs() {
+	archive, err := ioutil.ReadFile("log.txt")
+
+	if err != nil {
+		fmt.Println("An error has ocurred while opening logs:", err)
+	}
+
+	fmt.Println(string(archive))
 }

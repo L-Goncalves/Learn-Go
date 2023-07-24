@@ -6,3 +6,4 @@ What I've learned in this lesson:
 * Bufio to read a file
 * ReadString method from NewReader.
 * EOF Error
+* Better understanding how time works in Go, and how to convert to string.
