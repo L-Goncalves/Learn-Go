@@ -10,6 +10,8 @@ This is mainly my journey on Learning it and I hope I can improve all of this ov
 
 <a href="https://cursos.alura.com.br/course/golang"> Go: The Language by Google (Portuguese) </a>
 <br/>
+<a href="https://cursos.alura.com.br/course/go-lang-oo"> Go: Object Oriented (Portuguese)</a>
+<br/>
 <br/>
 <a href="https://www.youtube.com/@GolangDojo/videos">GolangDojo Youtube Channel </a>
 <br>
