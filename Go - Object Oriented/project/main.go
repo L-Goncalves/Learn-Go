@@ -30,13 +30,24 @@ func (c *BankAccount) addBalance(balanceAdded float64) (string, float64) {
 
 }
 
+func (c *BankAccount) transfer(value float64, account *BankAccount) bool {
+	if value <= c.balance && value > 0 {
+		c.balance -= value
+		account.addBalance(value)
+		return true
+	} else {
+		return false
+	}
+}
+
 func main() {
 
-	var josueAccount *BankAccount = new(BankAccount)
+	josueAccount := BankAccount{accountHolder: "Josue", balance: 300}
+	jorgeAccount := BankAccount{accountHolder: "Jorginho", balance: 200}
+	josueAccount.balance = 300
 
-	josueAccount.balance = 700
-
-	josueAccount.withdraw(700)
-
-	fmt.Println(josueAccount.addBalance(6500))
+	status := jorgeAccount.transfer(-200, &josueAccount)
+	fmt.Println(status)
+	fmt.Println(jorgeAccount)
+	fmt.Println(josueAccount)
 }
