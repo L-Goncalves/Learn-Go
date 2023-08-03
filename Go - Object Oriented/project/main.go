@@ -6,13 +6,9 @@ import (
 )
 
 func main() {
+	exampleAccount := accounts.BankAccount{}
+	exampleAccount.Addbalance(100)
 
-	josueAccount := accounts.BankAccount{AccountHolder: "Josue", Balance: 300}
-	jorgeAccount := accounts.BankAccount{AccountHolder: "Jorginho", Balance: 200}
-	josueAccount.Balance = 300
+	fmt.Println(exampleAccount.GetBalance())
 
-	status := jorgeAccount.Transfer(-200, &josueAccount)
-	fmt.Println(status)
-	fmt.Println(jorgeAccount)
-	fmt.Println(josueAccount)
 }

@@ -8,36 +8,40 @@ type BankAccount struct {
 	AccountHolder client.AccountHolder
 	BranchCode    int
 	AccountNumber int
-	Balance       float64
+	balance       float64
 }
 
 func (c *BankAccount) Withdraw(withdrawValue float64) (string, float64) {
-	canWithdraw := withdrawValue > 0 && withdrawValue < c.Balance
+	canWithdraw := withdrawValue > 0 && withdrawValue < c.balance
 
 	if canWithdraw {
-		c.Balance -= withdrawValue
-		return "Withdraw Successful", c.Balance
+		c.balance -= withdrawValue
+		return "Withdraw Successful", c.balance
 	}
 
-	return "Balance Unsuficient to complete transaction", c.Balance
+	return "balance Unsuficient to complete transaction", c.balance
 }
 
-func (c *BankAccount) AddBalance(BalanceAdded float64) (string, float64) {
-	if BalanceAdded > 0 {
-		c.Balance += BalanceAdded
-		return "Balance added Successfully", c.Balance
+func (c *BankAccount) Addbalance(balanceAdded float64) (string, float64) {
+	if balanceAdded > 0 {
+		c.balance += balanceAdded
+		return "balance added Successfully", c.balance
 	}
 
-	return "An Error Occurred while attempting to add Balance.", c.Balance
+	return "An Error Occurred while attempting to add balance.", c.balance
 
 }
 
 func (c *BankAccount) Transfer(value float64, account *BankAccount) bool {
-	if value <= c.Balance && value > 0 {
-		c.Balance -= value
-		account.AddBalance(value)
+	if value <= c.balance && value > 0 {
+		c.balance -= value
+		account.Addbalance(value)
 		return true
 	} else {
 		return false
 	}
+}
+
+func (c *BankAccount) GetBalance() float64 {
+	return c.balance
 }
